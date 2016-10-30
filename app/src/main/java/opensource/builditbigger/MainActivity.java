@@ -1,5 +1,6 @@
 package opensource.builditbigger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import com.example.Jokes;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import opensource.awesomejokes.JokeActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,5 +33,8 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.btn_joke)
     void showJoke() {
         Toast.makeText(this, joke.getJoke(), Toast.LENGTH_SHORT).show();
+        Intent jokeIntent = new Intent(this, JokeActivity.class);
+        jokeIntent.putExtra(JokeActivity.JOKE_KEY, joke.getJoke());
+        startActivity(jokeIntent);
     }
 }
