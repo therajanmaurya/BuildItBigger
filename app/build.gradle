@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 24
@@ -20,9 +21,18 @@ android {
 }
 
 dependencies {
+
+    final SUPPORT_LIBRARY_VERSION = '24.0.2'
+    final BUTTERKNIFE_VERSION = '8.4.0'
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':awesomejokes')
     compile project(':javajokes')
+
+    //Butter Knife
+    compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+    apt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+
     compile 'com.android.support:appcompat-v7:24.2.1'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
