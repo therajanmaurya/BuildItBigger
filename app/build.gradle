@@ -18,12 +18,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        free {
+            applicationId "opensource.builditbigger.free"
+        }
+        paid {
+            applicationId "opensource.builditbigger.paid"
+        }
+    }
 }
 
 dependencies {
 
     final SUPPORT_LIBRARY_VERSION = '24.0.2'
     final BUTTERKNIFE_VERSION = '8.4.0'
+    final PLAY_SERVICES = '9.4.0'
+    final DAGGER_VERSION = '2.7'
+    final RETROFIT_VERSION = '2.1.0'
 
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':awesomejokes')
@@ -33,12 +45,18 @@ dependencies {
     compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     apt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
 
+    compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+    freeCompile "com.google.android.gms:play-services-ads:$PLAY_SERVICES"
+
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    compile project(path: ':backend', configuration: 'android-endpoints')
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.google.code.findbugs:jsr305:2.0.1'
+    compile 'com.google.android.gms:play-services-ads:9.6.0'
     testCompile 'junit:junit:4.12'
-    compile project(path: ':backend', configuration: 'android-endpoints')
 }
